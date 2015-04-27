@@ -1,0 +1,12 @@
+@startuml
+
+class Test
+Test : id: int
+Test : name: String
+
+class OtherTest
+
+Test <|--|> OtherTest
+OtherTest -|> ThirdTest
+
+@enduml

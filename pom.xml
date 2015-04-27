@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.pgoetz.documentation</groupId>
+    <artifactId>arc42-maven</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>arc42 Software Architecture Documentation in Markdown / PlantUML with Maven</name>
+    <description>Maven Template for projects to document software architecture with Markdown and PlantUML.</description>
+    <inceptionYear>2015</inceptionYear>
+    <licenses>
+        <license>
+            <name>The Beerware License (Revision 42)</name>
+            <comments>
+                peter.s.goetz@gmail.com wrote this template.
+                As long as you retain this notice you can do whatever you want with this stuff.
+                If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.
+                Peter Götz (original version at http://people.freebsd.org/~phk/)
+            </comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>pgoetz</id>
+            <name>Peter Götz</name>
+            <email>peter.s.goetz@gmail.com</email>
+            <url>http://about.me/peter.goetz</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <generatedUmlImagesPath>src/site/resources/images/uml</generatedUmlImagesPath>
+        <arc42SingleMarkdownFileName>arc42-documentation.md</arc42SingleMarkdownFileName>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <sourceFiles>
+                        <directory>${basedir}/src/site/plantuml</directory>
+                        <includes>
+                            <include>**/*.puml</include>
+                        </includes>
+                    </sourceFiles>
+                    <graphvizDot>/usr/local/bin/dot</graphvizDot>
+                    <outputDirectory>${generatedUmlImagesPath}</outputDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.plantuml</groupId>
+                        <artifactId>plantuml</artifactId>
+                        <version>8019</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>generate-uml-model-site</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>generate-uml-model-package</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <concat destfile="${project.build.directory}/markdown/${arc42SingleMarkdownFileName}"
+                                        fixlastline="yes">
+                                    <fileset dir="src/site/markdown/doc" includes="*.md" excludes="00_TOC.md"/>
+                                </concat>
+                                <copy todir="${project.build.directory}/markdown">
+                                    <fileset dir="src/site/resources" includes="images/uml/**/*.png"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.8</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>clean-generated-model-resources</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.6.1</version>
+                        <executions>
+                            <execution>
+                                <id>clean-generated-uml-models</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${generatedUmlImagesPath}</directory>
+                                            <includes>
+                                                <include>**/*.png</include>
+                                            </includes>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.8</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>summary</report>
+                            <report>project-team</report>
+                            <report>license</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

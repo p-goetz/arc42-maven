@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Maven" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+    <bannerLeft>
+        <name>Software Architekturen dokumentieren mit arc42</name>
+    </bannerLeft>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.1</version>
+    </skin>
+    <custom>
+        <fluidoSkin>
+            <sideBarEnabled>true</sideBarEnabled>
+            <copyrightClass>pull-right</copyrightClass>
+            <gitHub>
+                <projectId>p-goetz/arc42-maven</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>orange</ribbonColor>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+
+    <body>
+        <links>
+            <item name="arc42" href="http://www.arc42.de/"/>
+            <item name="Markdown" href="http://markdown.de/"/>
+            <item name="PlantUML" href="http://plantuml.sourceforge.net/"/>
+        </links>
+        <menu>
+            <item name="Startseite" href="index.html"/>
+            <item name="arc42 Dokumentation" href="doc/00_TOC.html">
+                <item name="1. Einführung und Ziele" href="doc/01_Einfuehrung-und-Ziele.html"/>
+                <item name="2. Randbedingungen" href="doc/02_Randbedingungen.html"/>
+                <item name="3. Kontextabgrenzung" href="doc/03_Kontextabgrenzung.html"/>
+                <item name="4. Lösungsstrategie" href="doc/04_Loesungsstrategie.html"/>
+                <item name="5. Bausteinsicht" href="doc/05_Bausteinsicht.html"/>
+                <item name="6. Laufzeitsicht" href="doc/06_Laufzeitsicht.html"/>
+                <item name="7. Verteilungssicht" href="doc/07_Verteilungssicht.html"/>
+                <item name="8. Konzepte" href="doc/08_Konzepte.html"/>
+                <item name="9. Entwurfsentscheidungen" href="doc/09_Entwurfsentscheidungen.html"/>
+                <item name="10. Qualitätsszenarien" href="doc/10_Qualitaetsszenarien.html"/>
+                <item name="11. Risiken" href="doc/11_Risiken.html"/>
+                <item name="12. Glossar" href="doc/12_Glossar.html"/>
+            </item>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>
