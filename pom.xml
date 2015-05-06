@@ -54,7 +54,7 @@
                             <include>**/*.puml</include>
                         </includes>
                     </sourceFiles>
-                    <graphvizDot>/usr/local/bin/dot</graphvizDot>
+                    <!--graphvizDot>/path/to/dot</graphvizDot-->
                     <outputDirectory>${generatedUmlImagesPath}</outputDirectory>
                 </configuration>
                 <dependencies>
