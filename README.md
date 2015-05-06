@@ -10,6 +10,6 @@ For simple UML diagrams you can use PlantUML (http://plantuml.sourceforge.net/) 
 
 ## Usage
 
-The markdown input files can be found under `src/site/markdown`. The `index.md` contains detailed information on the template. The chapters of the arc42 template are stored in `src/site/markdown/doc`. Images can be linked with the standard markdown syntax and should be stored under `src/site/resources` (see example image at `index.md`). 
+The markdown input files can be found under `src/site/markdown`. The `index.md` contains detailed information on the template. The chapters of the arc42 template are stored in `src/site/markdown/doc`. Images can be linked using the standard markdown syntax and should be stored under `src/site/resources` (see example image at `index.md`). 
 
 The site will be built with `mvn site` and is stored in the `target` directory. 
